@@ -1,0 +1,49 @@
+/*
+ * jsmpros.com
+ * For demonstration purposes only
+ * Please review and evaluate before use
+ * Use at your own risk
+ */
+
+Function IScript_EmplTimeline
+   Local string &emplid = %Request.GetParameter("EMPLID");
+   Local string &empl_rcd = %Request.GetParameter("EMPL_RCD");
+   
+   Local SQL &cursor = GetSQL(SQL.JSM_EMPL_TIMELINE, &emplid, &empl_rcd);
+   Local string &effdt;
+   Local string &formattedDate;
+   Local string &action;
+   
+   Local JsonBuilder &jbldr = CreateJsonBuilder();
+   Local string &json;
+   Local number &evtIdx = 1;
+   Local string &start;
+   Local string &end;
+   Local string &name;
+   
+   If &jbldr.StartArrayReturnsTrue("timeline") Then
+      
+      While &cursor.Fetch(&effdt, &formattedDate, &action)
+         If &jbldr.StartObjectReturnsTrue("event") Then
+            &jbldr.AddProperty("id", "e" | &evtIdx);
+            &jbldr.AddProperty("title", &action);
+            &jbldr.AddProperty("start", &effdt);
+            &jbldr.AddProperty("description", &formattedDate);
+            
+            &jbldr.EndObject("event");
+         End-If;
+         &evtIdx = &evtIdx + 1;
+      End-While;
+      &jbldr.EndArray("timeline");
+   End-If;
+   
+   &json = &jbldr.GetRootNode().GetJsonObject().GetJsonArray("timeline").ToString();
+   
+   SQLExec(SQL.JSM_EMPL_TIMELINE_STARTEND, &emplid, &empl_rcd, &start, &end);
+   SQLExec(SQL.JSM_EMPL_NAME_DISPLAY, &emplid, &name);
+   
+   %Response.WriteLine(GetHTMLText(HTML.JSM_EMPL_TIMELINE, &json, &name, &start, &end, &emplid));
+   
+   
+End-Function;
+

@@ -1,0 +1,16 @@
+-- jsmpros.com
+-- for demonstration purposes only
+-- use at your own riskSELECT TO_CHAR(J.EFFDT 
+ , 'YYYY-MM-DD') 
+ , TO_CHAR(J.EFFDT 
+ , 'Mon DD, YYYY') 
+ , A.ACTION_DESCR 
+  FROM PS_JOB J INNER JOIN PS_ACTION_TBL A ON J.ACTION = A.ACTION 
+ WHERE A.EFFDT = ( 
+ SELECT MAX(A_ED.EFFDT) 
+  FROM PS_ACTION_TBL A_ED 
+ WHERE A_ED.ACTION = A.ACTION 
+   AND A_ED.EFFDT <= J.EFFDT ) 
+   AND EMPLID = :1 
+   AND EMPL_RCD = :2 
+  ORDER BY J.EFFDT

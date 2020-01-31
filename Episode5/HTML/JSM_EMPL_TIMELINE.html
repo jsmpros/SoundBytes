@@ -1,0 +1,76 @@
+<!--
+    jsmpros.com
+    for demonstration purposes only
+    use at your own risk
+-->
+<html>
+
+<head>
+	<script>
+		function importStylesheet(sheetUrl) {
+			var ss = document.createElement("link");
+			ss.rel = "stylesheet";
+			ss.href = sheetUrl;
+			ss.type = "text/css";
+			document.getElementsByTagName("head")[0].appendChild(ss);
+		}
+
+		var oJetRootUrl = (function (scriptId) {
+			var mainUrl = /*window.strCurrUrl ||*/ window.location.href;
+			var parts =
+				mainUrl.match(/ps[pc]\/(.+?)(?:_)*?(?:\d)*?\/(.+?)\/(.+?)\/[chs]\//);
+			return '/' + parts[1] + '/oraclejet/';
+		}());
+
+		importStylesheet(oJetRootUrl + 'css/libs/oj/v4.0.0/alta/oj-alta-min.css');
+
+	</script>
+	<script src="%JavaScript(JSM_OJET_CFG_JS)"></script>
+	<script src="%JavaScript(JSM_OJET_REQUIRE_JS)"></script>
+	<script>
+		// require configuration imported from
+		// https://codepen.io/jimj/pen/GqqwQz.js
+
+		require(['knockout',
+			'jquery',
+			'ojs/ojcore',
+			'ojs/ojknockout',
+			'ojs/ojtimeline'
+		], function (ko, $, oj) {
+			'use strict';
+
+			var ViewModel = function () {
+				var self = this;
+				var data = [{
+					id: '%Bind(:5)' /* EMPLID */,
+					emptyText: "This employee has no history",
+					label: '%Bind(:2)' /* employee name */,
+					items: %Bind(:1) /* JSON data */
+						.map(function (row) {
+							row.series = '%Bind(:2)' /* employee name */
+							return row;
+						})
+				}];
+
+
+				//self.seriesData = data;
+				self.seriesData = data;
+				// photo URL: /psc/ps/EMPLOYEE/HRMS/s/WEBLIB_JSM_EMPL.ISCRIPT1.FieldFormula.IScript_GetPhoto?EMPLID=KU0055
+			};
+
+			window.vm = new ViewModel();
+			window.ko = ko;
+
+			ko.applyBindings(vm);
+		});
+	</script>
+
+</head>
+
+<body>
+	<oj-timeline start='%Bind(:3)' end='%Bind(:4)' viewport-start='%Bind(:3)' viewport-end='%Bind(:4)'
+		major-axis='{"scale": "years"}' minor-axis='{"scale": "months"}' series='{{seriesData}}'>
+	</oj-timeline>
+</body>
+
+</html>
