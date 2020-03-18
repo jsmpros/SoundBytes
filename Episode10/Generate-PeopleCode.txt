@@ -1,0 +1,2 @@
+Local string &url = GenerateComponentPortalURL(%Portal, %Node, MenuName.NUI_FRAMEWORK, "GBL", Component.PT_AGSTARTPAGE_NUI, "", "U");
+&url = &url | "CONTEXTIDPARAMS=TEMPLATE_ID%3aPTPPNAVCOL&scname=HC_PORTAL&PanelCollapsible=Y&PTPPB_GROUPLET_ID=HC_PORTAL&CRefName=HC_NAVCOLL_2";

@@ -1,0 +1,17 @@
+Declare Function PortalOpen PeopleCode FUNCLIB_PORTAL.PORTAL_GEN_FUNC FieldFormula;
+
+Local ApiObject &Portal = PortalOpen();
+Local ApiObject &cref = &Portal.FindCRefByName("HC_NAVCOLL_2");
+Local string &url;
+
+If (All(&cref)) Then
+   &url = &cref.AbsolutePortalUrl;
+
+
+   /* TODO: Do something with &url, such as:
+
+    *   %Response.RedirectURL(&url);
+    *   &rs(1).PTLAYOUT.GROUPBOX1.SetGroupletActionUrl(&url);
+    */
+
+End-If;

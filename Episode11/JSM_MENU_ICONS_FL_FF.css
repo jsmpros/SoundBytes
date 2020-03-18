@@ -1,0 +1,27 @@
+@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
+div#PT_ACTION_MENU\$divpop .ps_menusection a.ps-link::before {
+	color: rgb(57,106,144);
+    content: '';
+    display: inline-block;
+    font-family: FontAwesome;
+    height: .1em;
+	padding-right: .4em;
+    width: 1em;
+}
+
+div#PT_ACTION_MENU\$divpop .ps_menusection #PT_ADDHP_MENU.ps-link::before {
+    content: '\f08d';
+}
+
+div#PT_ACTION_MENU\$divpop .ps_menusection #PT_ADDNB_MENU.ps-link::before {
+    content: '\f14e';
+}
+
+div#PT_ACTION_MENU\$divpop .ps_menusection #PT_ADDFAV_MENU.ps-link::before {
+    content: '\f005';
+}
+
+div#PT_ACTION_MENU\$divpop .ps_menusection #PT_MY_PREFERENCES.ps-link::before {
+    content: '\f007';
+}

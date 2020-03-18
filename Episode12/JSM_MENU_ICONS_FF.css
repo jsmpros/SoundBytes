@@ -1,0 +1,32 @@
+@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
+#ACTION_LINK_CONTAINER .ps_menusection a.ps-link::before,
+#ACTION_LINK_CONTAINER #pthdr2ctimcf::before,
+#ACTION_LINK_CONTAINER #pthdr2mypreferences::before,
+#ACTION_LINK_CONTAINER #pthdr2signout::before
+ {
+
+	color: rgb(57,106,144);
+    content: '';
+    display: inline-block;
+    font-family: FontAwesome;
+    height: .1em;
+	padding-right: .4em;
+    width: 1em;
+}
+
+#ACTION_LINK_CONTAINER #addToHomepageId::before {
+    content: '\f08d';
+}
+
+#ACTION_LINK_CONTAINER #addToNavbarId::before {
+    content: '\f14e';
+}
+
+#ACTION_LINK_CONTAINER #addToFavoritesId::before {
+    content: '\f005';
+}
+
+#ACTION_LINK_CONTAINER #pthdr2mypreferences::before {
+    content: '\f007';
+}

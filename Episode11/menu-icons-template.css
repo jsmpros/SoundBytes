@@ -1,0 +1,12 @@
+/* @import url("//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"); */
+@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
+div#PT_ACTION_MENU\$divpop .ps_menusection a.ps-link::before {
+	color: rgb(57,106,144);
+    content: '';
+    display: inline-block;
+    font-family: FontAwesome;
+    height: 1em;
+	padding-right: .4em;
+    width: 1em;
+}
