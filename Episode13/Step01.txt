@@ -1,0 +1,23 @@
+Local string &emplid = "KU0020";
+Local date &effdt;
+Local SQL &cursor = CreateSQL("SELECT EFFDT FROM PS_JOB WHERE EMPLID = :1 ORDER BY EMPL_RCD, EFFDT", &emplid);
+
+Local JsonBuilder &jbldr = CreateJsonBuilder();
+Local string &json;
+
+If &jbldr.StartObjectReturnsTrue("employee") Then
+   
+   &jbldr.AddProperty("emplid", &emplid);
+   If &jbldr.StartArrayReturnsTrue("effdt") Then
+      
+      While &cursor.Fetch(&effdt)
+         &jbldr.AddElement(&effdt);
+      End-While;
+      
+      &jbldr.EndArray("effdt");
+   End-If;
+   
+   &jbldr.EndObject("employee");
+End-If;
+
+MessageBox(0, "", 0, 0, &jbldr.ToString());
