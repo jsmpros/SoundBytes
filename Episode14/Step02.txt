@@ -1,0 +1,17 @@
+Local string &emplid = "KU0020";
+Local date &effdt;
+Local SQL &cursor = CreateSQL("SELECT EFFDT FROM PS_JOB WHERE EMPLID = :1 ORDER BY EFFDT", &emplid);
+
+Local JavaObject &jsonEmpl = CreateJavaObject("org.json.JSONObject");
+Local JavaObject &jsonEffdt = CreateJavaObject("org.json.JSONArray");
+
+Local string &json;
+
+&jsonEmpl.put("emplid", &emplid);
+&jsonEmpl.put("effdt", &jsonEffdt);
+
+While &cursor.Fetch(&effdt)
+   &jsonEffdt.put(&effdt);
+End-While;
+
+MessageBox(0, "", 0, 0, &jsonEmpl.toString());
