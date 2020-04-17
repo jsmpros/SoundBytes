@@ -1,0 +1,38 @@
+Local string &emplid = "KU0020";
+Local date &effdt;
+Local SQL &cursor = CreateSQL("SELECT EFFDT FROM PS_JOB WHERE EMPLID = :1 ORDER BY EFFDT", &emplid);
+
+Local JsonObject &jsonEmpl = CreateJsonObject();
+Local JsonArray &jsonEffdt = CreateJsonArray();
+
+Local string &json;
+
+&jsonEmpl.AddProperty("emplid", &emplid);
+
+REM ** BEGIN Null;
+&jsonEmpl.AddProperty("empty", "");
+Local JsonNode &emptyNode = &jsonEmpl.GetJsonNode("empty");
+&emptyNode.SetNull();
+&emptyNode.SetNodeName("empty");
+REM ** END Null;
+
+&jsonEmpl.AddJsonArray("effdt", &jsonEffdt);
+
+While &cursor.Fetch(&effdt)
+   &jsonEffdt.AddElement(&effdt);
+End-While;
+
+rem &json = &jsonEmpl.ToString();
+
+REM ** BEGIN Minification;
+Local JsonGenerator &jgen = CreateJsonGenerator();
+Local JsonNode &root = CreateJsonNode();
+
+&root.SetJsonObject(&jsonEmpl);
+&jgen.SetRootNode(&root);
+&jgen.SetPrettyMode( False);
+
+&json = &jgen.ToString();
+REM ** END Minification;
+
+MessageBox(0, "", 0, 0, &json);
