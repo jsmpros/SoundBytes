@@ -1,0 +1,17 @@
+Local JavaObject &manager = CreateJavaObject("javax.script.ScriptEngineManager");
+Local JavaObject &engine = &manager.getEngineByName("JavaScript");
+
+Local string &script = MsgGetExplainText(20000, 3, "");
+Local string &source = MsgGetExplainText(20000, 4, "");
+
+REM ** The JavaScript expects the role name to be a global variable;
+&engine.put("json", &source);
+&engine.eval(&script);
+
+Local string &str = " "" ";
+
+Local string &json = &engine.get("result").toString();
+
+REM ** Do something with the JSON response;
+
+MessageBox(0, "", 0, 0, &json);

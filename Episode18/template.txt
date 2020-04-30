@@ -1,0 +1,5 @@
+/* JavaScript */
+var result = (function () {
+
+	return /* Result goes here */;
+}());

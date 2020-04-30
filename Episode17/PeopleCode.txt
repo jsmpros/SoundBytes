@@ -1,0 +1,19 @@
+Local string &emplid = "KU0020";
+Local date &effdt;
+Local SQL &cursor = CreateSQL("SELECT EFFDT FROM PS_JOB WHERE EMPLID = :1 ORDER BY EFFDT", &emplid);
+
+Local Document &DOC = CreateDocument("JSM_JS", "EMPL", "v1");
+Local Compound &A = &DOC.DocumentElement;
+Local Primitive &PR = &A.GetPropertyByName("emplid");
+&PR.Value = &emplid;
+Local Collection &AO = &A.GetPropertyByName("dates");
+
+While &cursor.Fetch(&effdt)
+   &PR = &AO.CreateItem();
+   &PR.Value = &effdt;
+   &ret = &AO.AppendItem(&PR);
+End-While;
+
+Local string &json = &DOC.GenJsonString();
+
+MessageBox(0, "", 0, 0, &json);

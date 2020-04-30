@@ -1,0 +1,11 @@
+/* JavaScript */
+var result = (function () {
+	var inbound = JSON.parse(json);
+	var outbound = {
+		emplid: inbound.emplid,
+		addresses: inbound.EMPL_ADDR.map(function(el) {
+		  return {city: el.city, state: el.state, zip: el.postal};
+		})
+	  };
+	return JSON.stringify(outbound);
+}());
