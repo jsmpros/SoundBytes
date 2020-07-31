@@ -1,6 +1,7 @@
 -- jsmpros.com
 -- for demonstration purposes only
--- use at your own riskSELECT TO_CHAR(J.EFFDT 
+-- use at your own risk
+SELECT TO_CHAR(J.EFFDT 
  , 'YYYY-MM-DD') 
  , TO_CHAR(J.EFFDT 
  , 'Mon DD, YYYY') 
