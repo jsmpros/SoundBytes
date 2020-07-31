@@ -1,6 +1,7 @@
 -- jsmpros.com
 -- for demonstration purposes only
--- use at your own riskSELECT TO_CHAR(add_months( MIN(EFFDT) 
+-- use at your own risk
+SELECT TO_CHAR(add_months( MIN(EFFDT) 
  , -12) 
  , 'YYYY-MM-DD') 
  , TO_CHAR(add_months( MAX(EFFDT) 
