@@ -39,7 +39,7 @@ Function IScript_EmplTimeline
    
    &json = &jbldr.GetRootNode().GetJsonObject().GetJsonArray("timeline").ToString();
    
-   SQLExec(SQL.JSM_EMPL_TIMELINE_STARTEND, &emplid, &empl_rcd, &start, &end);
+   SQLExec(SQL.JSM_EMPL_TIMELINE_START, &emplid, &empl_rcd, &start, &end);
    SQLExec(SQL.JSM_EMPL_NAME_DISPLAY, &emplid, &name);
    
    %Response.WriteLine(GetHTMLText(HTML.JSM_EMPL_TIMELINE, &json, &name, &start, &end, &emplid));
